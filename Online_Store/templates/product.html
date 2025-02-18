@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename=product.image) }}" class="img-fluid" alt="{{ product.name }}">
+            </div>
+            <div class="col-md-6">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.description }}</p>
+                <p><strong>Price:</strong> ${{ product.price }}</p>
+                <p><strong>Stock:</strong> {{ product.stock }}</p>
+                <form method="POST" action="{{ url_for('add_to_cart', product_id=product.id) }}">
+                    <div class="form-group">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="{{ product.stock }}" value="1">
+                    </div>
+                    <button type="submit" class="btn btn-success">Add to Cart</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
